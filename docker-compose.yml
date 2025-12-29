@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: databridge_postgres
+    environment:
+      POSTGRES_DB: databridge
+      POSTGRES_USER: databridge_user
+      POSTGRES_PASSWORD: databridge_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U databridge_user -d databridge"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - databridge_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: databridge_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - databridge_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: databridge_backend
+    environment:
+      DATABASE_URL: postgresql://databridge_user:databridge_pass@postgres:5432/databridge
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/uploads:/app/uploads
+      - ./backend:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - databridge_network
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: databridge_worker
+    environment:
+      DATABASE_URL: postgresql://databridge_user:databridge_pass@postgres:5432/databridge
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    volumes:
+      - ./data/uploads:/app/uploads
+      - ./backend:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A app.worker worker --loglevel=info
+    networks:
+      - databridge_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: databridge_frontend
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    command: streamlit run app.py --server.address 0.0.0.0 --server.port 8501
+    networks:
+      - databridge_network
+
+volumes:
+  postgres_data:
+
+networks:
+  databridge_network:
+    driver: bridge
