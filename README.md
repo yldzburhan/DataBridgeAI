@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://imgur.com/v607JPa.png" alt="DataBridge AI Logo" width="600" /> 
-<h1>Enterprise-Grade ETL Platform with AI-Powered Data Quality Management</h1>
+<h3>Enterprise-Grade ETL Platform with AI-Powered Data Quality Management</h3>
 </div>
 
 DataBridge AI is a comprehensive Extract-Transform-Load (ETL) solution designed to address the challenges enterprises face when processing, validating, and integrating heterogeneous data sources. By combining deterministic data validation with AI-powered error correction, the platform significantly reduces manual data cleansing efforts while maintaining data integrity.
@@ -431,6 +431,7 @@ Contributions are welcome. Please ensure:
 - Documentation is updated accordingly
 
 For major changes, please open an issue first to discuss the proposed modifications.
+
 
 
 
