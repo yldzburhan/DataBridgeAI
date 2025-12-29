@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="https://imgur.com/v607JPa.png" alt="MinutesFlow AI Logo" width="600" /> </div>
+  <img src="https://imgur.com/v607JPa.png" alt="DataBridge AI Logo" width="600" /> 
+<h1>AI-Powered Meeting Minutes Generator</h1>
+</div>
 
 **Enterprise-Grade ETL Platform with AI-Powered Data Quality Management**
 
@@ -431,5 +433,6 @@ Contributions are welcome. Please ensure:
 - Documentation is updated accordingly
 
 For major changes, please open an issue first to discuss the proposed modifications.
+
 
 
