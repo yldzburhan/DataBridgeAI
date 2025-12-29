@@ -415,11 +415,29 @@ docker exec -it databridge_postgres psql -U databridge_user -d databridge
 - Batch commits occur every 10 rows to balance performance and reliability
 - Consider disabling AI auto-fix for very large files to reduce processing time
 
+
+---
+
+## Demo
+
+[![Demo Video](https://img.youtube.com/vi/4K1nk1bRHHA/maxresdefault.jpg)](https://youtu.be/4K1nk1bRHHA)
+
+> Click the image to watch the demo on YouTube.
+
 ---
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Developer
+
+**Developed by Burhan Yıldız**
+
+- GitHub: [@yldzburhan](https://github.com/yldzburhan)
+- LinkedIn: [linkedin.com/in/burhanyildiz](https://www.linkedin.com/in/burhanyildiz/)
 
 ---
 
@@ -431,6 +449,7 @@ Contributions are welcome. Please ensure:
 - Documentation is updated accordingly
 
 For major changes, please open an issue first to discuss the proposed modifications.
+
 
 
 
