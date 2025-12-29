@@ -1,4 +1,5 @@
-# DataBridge AI
+<div align="center">
+  <img src="https://imgur.com/v607JPa.png" alt="MinutesFlow AI Logo" width="600" />
 
 **Enterprise-Grade ETL Platform with AI-Powered Data Quality Management**
 
@@ -430,3 +431,4 @@ Contributions are welcome. Please ensure:
 - Documentation is updated accordingly
 
 For major changes, please open an issue first to discuss the proposed modifications.
+
